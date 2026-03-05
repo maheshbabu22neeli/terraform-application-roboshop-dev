@@ -1,0 +1,19 @@
+bastion:
+  - name: bastion_internet  # means Bastion accepting connections from Internet/My System using IP
+    port: 22
+    src: internet
+    dest: bastion
+
+mongodb:
+  - name: mongodb_bastion  # means MongoDB accepting connections from Bastion
+    port: 22
+    src: bastion
+    dest: mongodb
+  - name: mongodb_user   # means MongoDB accepting connections from User
+    port: 27017
+    src: user
+    dest: mongodb
+  - name: mongodb_catalogue  # means MongoDB accepting connections from Catalogue
+    port: 27017
+    src: catalogue
+    dest: mongodb
