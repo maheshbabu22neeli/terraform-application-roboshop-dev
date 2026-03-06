@@ -41,8 +41,10 @@ resource "aws_iam_role" "bastion" {
 }
 
 resource "aws_iam_role_policy_attachment" "bastion" {
+  for_each = toset(var.bastion_policy_arns)
+
   role       = aws_iam_role.bastion.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
+  policy_arn = each.value
 }
 
 resource "aws_iam_instance_profile" "bastion" {
