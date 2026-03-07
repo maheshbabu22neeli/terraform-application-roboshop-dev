@@ -4,6 +4,22 @@ resource "aws_instance" "bastion" {
   subnet_id     = local.public_subnet_id
   vpc_security_group_ids = [local.bastion_sg_id]
   iam_instance_profile = aws_iam_instance_profile.bastion.name
+  user_data = file("bastion.sh")
+
+  # Increase Disk Space
+  # This is the main disk where the operating system is installed
+  # root_block_device refers to the storage (EBS volume) attached to the root filesystem of an EC2 instance
+  root_block_device {
+    volume_size = 50
+    volume_type = "gp3"
+    # EBS volume tags
+    tags = merge(
+      local.common_tags,
+      {
+        Name = "${var.project}-${var.environment}-bastion"
+      }
+    )
+  }
 
   tags = merge(
     local.common_tags,
