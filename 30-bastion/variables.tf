@@ -11,7 +11,7 @@ variable "bastion_policy_arns" {
   type        = list(string)
   default = [
     "arn:aws:iam::aws:policy/AmazonEC2FullAccess",
-    "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess",
+    "arn:aws:iam::aws:policy/AmazonS3FullAccess",
     "arn:aws:iam::aws:policy/AmazonRoute53FullAccess",
   ]
 }
