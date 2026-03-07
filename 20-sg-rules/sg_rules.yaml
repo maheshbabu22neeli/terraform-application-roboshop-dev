@@ -17,3 +17,9 @@ mongodb:
     port: 27017
     src: catalogue
     dest: mongodb
+
+redis:
+  - name: redis_bastion  # means Redis accepting connections from Bastion
+    port: 22
+    src: bastion
+    dest: redis
