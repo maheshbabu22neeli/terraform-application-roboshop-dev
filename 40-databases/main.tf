@@ -1,3 +1,4 @@
+# Mongo DB Configuration
 resource "aws_instance" "mongodb" {
   ami                    = local.ami_id
   instance_type          = "t3.micro"
@@ -34,6 +35,48 @@ resource "terraform_data" "configure_remote" {
     inline = [
       "chmod -x /tmp/bootstrap.sh",
       "sudo sh /tmp/bootstrap.sh mongodb"
+    ]
+  }
+}
+
+
+# Redis Configuration
+resource "aws_instance" "redis" {
+  ami                    = local.ami_id
+  instance_type          = "t3.micro"
+  vpc_security_group_ids = [local.redis_sg_id]
+  subnet_id              = local.database_subnet_id
+
+  tags = merge(
+    local.common_tags,
+    {
+      Name = "${var.project}-${var.environment}-redis"
+    }
+  )
+}
+
+resource "terraform_data" "configure_remote_redis" {
+  # Use triggers to rerun this block if the instance IP changes
+  triggers_replace = [
+    aws_instance.redis.id
+  ]
+
+  connection {
+    type        = "ssh"
+    user        = "ec2-user"
+    password    = "DevOps321"
+    host        = aws_instance.redis.private_ip
+  }
+
+  provisioner "file" {
+    source      = "bootstrap.sh"         # Local file path
+    destination = "/tmp/bootstrap.sh"    # Destination path on the remote machine
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod -x /tmp/bootstrap.sh",
+      "sudo sh /tmp/bootstrap.sh redis"
     ]
   }
 }
