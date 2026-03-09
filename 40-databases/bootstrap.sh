@@ -11,6 +11,6 @@ git clone https://github.com/maheshbabu22neeli/terraform-ansible-roles-roboshop.
 
 cd terraform-ansible-roles-roboshop
 
-#git pull
+git pull
 
 ansible-playbook -e component=$COMPONENT ansible-roles-roboshop.yaml
