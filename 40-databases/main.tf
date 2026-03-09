@@ -85,7 +85,7 @@ resource "terraform_data" "redis_remote" {
 resource "aws_instance" "mysql" {
   ami                    = local.ami_id
   instance_type          = "t3.micro"
-  vpc_security_group_ids = [local.redis_sg_id]
+  vpc_security_group_ids = [local.mysql_sg_id]
   subnet_id              = local.database_subnet_id
 
   tags = merge(

@@ -23,3 +23,9 @@ redis:
     port: 22
     src: bastion
     dest: redis
+
+mysql:
+  - name: mysql_bastion
+    port: 22
+    src: bastion
+    dest: mysql
