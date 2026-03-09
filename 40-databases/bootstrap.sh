@@ -2,6 +2,7 @@
 
 
 COMPONENT=$1
+ENV=$2
 
 dnf install ansible -y
 
@@ -13,4 +14,4 @@ cd terraform-ansible-roles-roboshop
 
 git pull
 
-ansible-playbook -e component=$COMPONENT ansible-roles-roboshop.yaml
+ansible-playbook -e component=$COMPONENT -e ENV=$ENV ansible-roles-roboshop.yaml
