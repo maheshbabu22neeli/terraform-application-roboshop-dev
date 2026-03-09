@@ -30,7 +30,7 @@ resource "aws_instance" "bastion" {
 }
 
 resource "aws_iam_role" "bastion" {
-  name = "RoboshopDevBastion"
+  name = local.bastion_role_name
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
@@ -51,7 +51,7 @@ resource "aws_iam_role" "bastion" {
   tags = merge(
     local.common_tags,
     {
-      Name = "RoboshopDevBastion"
+      Name = local.bastion_role_name
     }
   )
 }
