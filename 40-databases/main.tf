@@ -96,7 +96,7 @@ resource "aws_instance" "mysql" {
   )
 }
 
-resource "terraform_data" "redis_remote" {
+resource "terraform_data" "mysql_remote" {
   # Use triggers to rerun this block if the instance IP changes
   triggers_replace = [
     aws_instance.mysql.id
