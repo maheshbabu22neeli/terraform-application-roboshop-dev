@@ -1,3 +1,4 @@
+# MySQL IAM Role and Policy
 resource "aws_iam_role" "mysql" {
   name = local.mysql_role_name   # Roboshop-Dev-Mysql
 
@@ -39,4 +40,50 @@ resource "aws_iam_role_policy_attachment" "mysql" {
 resource "aws_iam_instance_profile" "mysql" {
   name = "${var.project}-${var.environment}-mysql"
   role = aws_iam_role.mysql.name
+}
+
+
+
+# RabbitMq IAM Role and Policy
+resource "aws_iam_role" "rabbitmq" {
+  name = local.rabbitmq_role_name   # Roboshop-Dev-Rabbitmq
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      },
+    ]
+  })
+
+  tags = merge(
+    local.common_tags,
+    {
+      Name = local.rabbitmq_role_name
+    }
+  )
+}
+
+resource "aws_iam_policy" "rabbitmq" {
+  name        = local.rabbitmq_policy_name
+  description = "A policy for rabbitmq EC2 instance to read SSM parameters"
+  policy      = templatefile("rabbitmq-iam-policy.json", {
+    ENV = var.environment
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "rabbitmq" {
+  role       = aws_iam_role.rabbitmq.name
+  policy_arn = aws_iam_policy.rabbitmq.arn
+}
+
+resource "aws_iam_instance_profile" "rabbitmq" {
+  name = "${var.project}-${var.environment}-rabbitmq"
+  role = aws_iam_role.rabbitmq.name
 }
