@@ -29,3 +29,9 @@ mysql:
     port: 22
     src: bastion
     dest: mysql
+
+rabbitmq:
+  - name: rabbitmq_bastion
+    port: 22
+    src: bastion
+    dest: rabbitmq
