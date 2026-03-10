@@ -35,3 +35,9 @@ rabbitmq:
     port: 22
     src: bastion
     dest: rabbitmq
+
+backend-alb:
+  - name: backend_alb_bastion
+    port: 80
+    src: bastion
+    dest: backend-alb
