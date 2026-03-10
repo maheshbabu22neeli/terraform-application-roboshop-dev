@@ -20,15 +20,15 @@ resource "terraform_data" "mongodb_remote" {
   ]
 
   connection {
-    type        = "ssh"
-    user        = "ec2-user"
-    password    = "DevOps321"
-    host        = aws_instance.mongodb.private_ip
+    type     = "ssh"
+    user     = "ec2-user"
+    password = "DevOps321"
+    host     = aws_instance.mongodb.private_ip
   }
 
   provisioner "file" {
-    source      = "bootstrap.sh"         # Local file path
-    destination = "/tmp/bootstrap.sh"    # Destination path on the remote machine
+    source      = "bootstrap.sh"      # Local file path
+    destination = "/tmp/bootstrap.sh" # Destination path on the remote machine
   }
 
   provisioner "remote-exec" {
@@ -62,15 +62,15 @@ resource "terraform_data" "redis_remote" {
   ]
 
   connection {
-    type        = "ssh"
-    user        = "ec2-user"
-    password    = "DevOps321"
-    host        = aws_instance.redis.private_ip
+    type     = "ssh"
+    user     = "ec2-user"
+    password = "DevOps321"
+    host     = aws_instance.redis.private_ip
   }
 
   provisioner "file" {
-    source      = "bootstrap.sh"         # Local file path
-    destination = "/tmp/bootstrap.sh"    # Destination path on the remote machine
+    source      = "bootstrap.sh"      # Local file path
+    destination = "/tmp/bootstrap.sh" # Destination path on the remote machine
   }
 
   provisioner "remote-exec" {
@@ -89,7 +89,7 @@ resource "aws_instance" "mysql" {
   instance_type          = "t3.micro"
   vpc_security_group_ids = [local.mysql_sg_id]
   subnet_id              = local.database_subnet_id
-  iam_instance_profile = aws_iam_instance_profile.mysql.name
+  iam_instance_profile   = aws_iam_instance_profile.mysql.name
 
   tags = merge(
     local.common_tags,
@@ -106,15 +106,15 @@ resource "terraform_data" "mysql_remote" {
   ]
 
   connection {
-    type        = "ssh"
-    user        = "ec2-user"
-    password    = "DevOps321"
-    host        = aws_instance.mysql.private_ip
+    type     = "ssh"
+    user     = "ec2-user"
+    password = "DevOps321"
+    host     = aws_instance.mysql.private_ip
   }
 
   provisioner "file" {
-    source      = "bootstrap.sh"         # Local file path
-    destination = "/tmp/bootstrap.sh"    # Destination path on the remote machine
+    source      = "bootstrap.sh"      # Local file path
+    destination = "/tmp/bootstrap.sh" # Destination path on the remote machine
   }
 
   provisioner "remote-exec" {
@@ -149,15 +149,15 @@ resource "terraform_data" "rabbitmq_remote" {
   ]
 
   connection {
-    type        = "ssh"
-    user        = "ec2-user"
-    password    = "DevOps321"
-    host        = aws_instance.rabbitmq.private_ip
+    type     = "ssh"
+    user     = "ec2-user"
+    password = "DevOps321"
+    host     = aws_instance.rabbitmq.private_ip
   }
 
   provisioner "file" {
-    source      = "bootstrap.sh"         # Local file path
-    destination = "/tmp/bootstrap.sh"    # Destination path on the remote machine
+    source      = "bootstrap.sh"      # Local file path
+    destination = "/tmp/bootstrap.sh" # Destination path on the remote machine
   }
 
   provisioner "remote-exec" {

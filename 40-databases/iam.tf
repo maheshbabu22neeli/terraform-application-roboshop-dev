@@ -1,6 +1,6 @@
 # MySQL IAM Role and Policy
 resource "aws_iam_role" "mysql" {
-  name = local.mysql_role_name   # Roboshop-Dev-Mysql
+  name = local.mysql_role_name # Roboshop-Dev-Mysql
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -27,7 +27,7 @@ resource "aws_iam_role" "mysql" {
 resource "aws_iam_policy" "mysql" {
   name        = local.mysql_policy_name
   description = "A policy for mysql EC2 instance to read SSM parameters"
-  policy      = templatefile("mysql-iam-policy.json", {
+  policy = templatefile("mysql-iam-policy.json", {
     ENV = var.environment
   })
 }
@@ -46,7 +46,7 @@ resource "aws_iam_instance_profile" "mysql" {
 
 # RabbitMq IAM Role and Policy
 resource "aws_iam_role" "rabbitmq" {
-  name = local.rabbitmq_role_name   # Roboshop-Dev-Rabbitmq
+  name = local.rabbitmq_role_name # Roboshop-Dev-Rabbitmq
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -73,7 +73,7 @@ resource "aws_iam_role" "rabbitmq" {
 resource "aws_iam_policy" "rabbitmq" {
   name        = local.rabbitmq_policy_name
   description = "A policy for rabbitmq EC2 instance to read SSM parameters"
-  policy      = templatefile("rabbitmq-iam-policy.json", {
+  policy = templatefile("rabbitmq-iam-policy.json", {
     ENV = var.environment
   })
 }

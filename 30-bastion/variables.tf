@@ -19,6 +19,6 @@ variable "bastion_policy_arns" {
 }
 
 variable "zone_id" {
-  type = string
+  type    = string
   default = "Z013175831RO1NWFBESW7"
 }
