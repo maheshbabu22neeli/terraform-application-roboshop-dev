@@ -41,3 +41,9 @@ backend-alb:
     port: 80
     src: bastion
     dest: backend-alb
+
+catalogue:
+  - name: catalogue_bastion
+    port: 22
+    src: bastion
+    dest: catalogue

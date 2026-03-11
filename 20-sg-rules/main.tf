@@ -60,6 +60,17 @@ resource "aws_security_group_rule" "backend_alb_bastion" {
   security_group_id        = local.backend_alb_sg_id
 }
 
+// catalogue is accepting connections from bastion on port ssh 22
+resource "aws_security_group_rule" "catalogue_bastion" {
+  type      = "ingress"
+  from_port = 22
+  to_port   = 22
+  protocol  = "tcp"
+  // which means catalogue accepting bastion sg id's
+  source_security_group_id = local.bastion_sg_id
+  security_group_id        = local.catalogue_sg_id
+}
+
 resource "aws_security_group_rule" "mongodb_catalogue" {
   type      = "ingress"
   from_port = 27017
