@@ -18,6 +18,26 @@ resource "aws_security_group_rule" "mongodb_bastion" {
   security_group_id        = local.mongodb_sg_id
 }
 
+resource "aws_security_group_rule" "mongodb_catalogue" {
+  type      = "ingress"
+  from_port = 27017
+  to_port   = 27017
+  protocol  = "tcp"
+  // which means mongodb accepting catalogue sg id's
+  source_security_group_id = local.catalogue_sg_id
+  security_group_id        = local.mongodb_sg_id
+}
+
+resource "aws_security_group_rule" "mongodb_user" {
+  type      = "ingress"
+  from_port = 27017
+  to_port   = 27017
+  protocol  = "tcp"
+  // which means mongodb accepting user sg id's
+  source_security_group_id = local.user_sg_id
+  security_group_id        = local.mongodb_sg_id
+}
+
 resource "aws_security_group_rule" "redis_bastion" {
   type      = "ingress"
   from_port = 22
@@ -71,22 +91,4 @@ resource "aws_security_group_rule" "catalogue_bastion" {
   security_group_id        = local.catalogue_sg_id
 }
 
-resource "aws_security_group_rule" "mongodb_catalogue" {
-  type      = "ingress"
-  from_port = 27017
-  to_port   = 27017
-  protocol  = "tcp"
-  // which means mongodb accepting catalogue sg id's
-  source_security_group_id = local.catalogue_sg_id
-  security_group_id        = local.mongodb_sg_id
-}
 
-resource "aws_security_group_rule" "mongodb_user" {
-  type      = "ingress"
-  from_port = 27017
-  to_port   = 27017
-  protocol  = "tcp"
-  // which means mongodb accepting user sg id's
-  source_security_group_id = local.user_sg_id
-  security_group_id        = local.mongodb_sg_id
-}
