@@ -66,8 +66,6 @@ resource "aws_lb_target_group" "catalogue" {
   deregistration_delay = 60
 
   health_check {
-    enabled = true
-
     protocol = "HTTP"
     path     = "/health"
     port     = 8080
@@ -76,7 +74,7 @@ resource "aws_lb_target_group" "catalogue" {
     healthy_threshold   = 2
     interval            = 10
     timeout             = 2
-    unhealthy_threshold = 2
+    unhealthy_threshold = 3
   }
 }
 
@@ -178,6 +176,7 @@ resource "aws_autoscaling_policy" "catalogue" {
   autoscaling_group_name = aws_autoscaling_group.catalogue.name
   name                   = "${var.project}-${var.environment}-catalogue"
   policy_type            = "TargetTrackingScaling"
+  estimated_instance_warmup = 120
 
   target_tracking_configuration {
     predefined_metric_specification {

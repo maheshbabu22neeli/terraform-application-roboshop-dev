@@ -47,3 +47,7 @@ catalogue:
     port: 22
     src: bastion
     dest: catalogue
+  - name: catalogue_backend_alb    # means catalogue accepting requests from backend_alb
+    port: 8080
+    src: backend_alb
+    dest: catalogue
