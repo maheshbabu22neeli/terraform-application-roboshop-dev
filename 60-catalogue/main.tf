@@ -153,7 +153,7 @@ resource "aws_autoscaling_group" "catalogue" {
   }
 
   # this is a dynamic block
-  dynamic "dynamicTag" {
+  dynamic "dynamic_tag" {
     for_each = merge(
       local.common_tags,
       {
@@ -162,8 +162,8 @@ resource "aws_autoscaling_group" "catalogue" {
     )
 
     content {
-      key                 = dynamicTag.key
-      value               = dynamicTag.value
+      key                 = dynamic_tag.key
+      value               = dynamic_tag.value
       propagate_at_launch = true
     }
   }
