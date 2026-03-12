@@ -18,4 +18,14 @@ for i in 00-vpc/ 10-sg/ 20-sg-rules/ 30-bastion/ 50-backend-alb/; do cd $i; terr
     terraform plan
     terraform apply -auto-approve
 ````
-4. 
+
+## Delete infra
+````
+for i in 50-backend-alb/ 30-bastion/ 20-sg-rules/ 10-sg/ 00-vpc/; do cd $i;terraform destroy -auto-approve; cd ..; done
+````
+
+
+### How to create stress on EC2 instance to test autoscaling
+1. Login to EC2 instance(ex: catalogue) using below command `ssh ec2-user@<private_ip>`
+2. Install stress-ng using command `sudo yum install stress-ng -y`
+3. Run stress command as `stress-ng --cpu 2 --cpu-load 70`
