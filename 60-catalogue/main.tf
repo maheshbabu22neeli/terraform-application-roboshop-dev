@@ -87,7 +87,7 @@ resource "aws_launch_template" "catalogue" {
   image_id = aws_ami_from_instance.catalogue.id
   # We completely want to shutdown/terminate instead of stopping
   instance_initiated_shutdown_behavior = "terminate"
-  instance_type                        = "t2.micro"
+  instance_type                        = "t3.micro"
   vpc_security_group_ids               = [local.catalogue_sg_id]
 
   # each time we apply terraform this version will be updated as default
