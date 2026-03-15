@@ -1,4 +1,4 @@
-# Mongo DB Configuration
+# Catalogue Configuration
 resource "aws_instance" "catalogue" {
   ami                    = local.ami_id
   instance_type          = "t3.micro"
@@ -33,7 +33,7 @@ resource "terraform_data" "catalogue_remote" {
 
   provisioner "remote-exec" {
     inline = [
-      "chmod -x /tmp/bootstrap.sh",
+      "chmod +x /tmp/bootstrap.sh",
       "sudo sh /tmp/bootstrap.sh catalogue ${var.environment} ${var.app_version}"
     ]
   }
