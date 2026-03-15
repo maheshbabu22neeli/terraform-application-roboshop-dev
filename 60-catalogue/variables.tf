@@ -15,3 +15,8 @@ variable "domain_name" {
   type    = string
   default = "neeli.online"
 }
+
+variable "app_version" {
+  type    = string
+  default = "v3"
+}

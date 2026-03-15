@@ -13,7 +13,7 @@ resource "aws_security_group_rule" "mongodb_bastion" {
   from_port = 22
   to_port   = 22
   protocol  = "tcp"
-  // which means mongodb accepting bastion sg id's
+  // which means mongodb accepting connection from bastion
   source_security_group_id = local.bastion_sg_id
   security_group_id        = local.mongodb_sg_id
 }
@@ -23,7 +23,7 @@ resource "aws_security_group_rule" "mongodb_catalogue" {
   from_port = 27017
   to_port   = 27017
   protocol  = "tcp"
-  // which means mongodb accepting catalogue sg id's
+  // which means mongodb accepting connection from catalogue
   source_security_group_id = local.catalogue_sg_id
   security_group_id        = local.mongodb_sg_id
 }
@@ -33,7 +33,7 @@ resource "aws_security_group_rule" "mongodb_user" {
   from_port = 27017
   to_port   = 27017
   protocol  = "tcp"
-  // which means mongodb accepting user sg id's
+  // which means mongodb accepting connection from user
   source_security_group_id = local.user_sg_id
   security_group_id        = local.mongodb_sg_id
 }
@@ -43,7 +43,7 @@ resource "aws_security_group_rule" "redis_bastion" {
   from_port = 22
   to_port   = 22
   protocol  = "tcp"
-  // which means redis accepting bastion sg id's
+  // which means redis accepting connection from bastion
   source_security_group_id = local.bastion_sg_id
   security_group_id        = local.redis_sg_id
 }
@@ -54,7 +54,7 @@ resource "aws_security_group_rule" "mysql_bastion" {
   from_port = 22
   to_port   = 22
   protocol  = "tcp"
-  // which means mysql accepting bastion sg id's
+  // which means mysql accepting connection from bastion
   source_security_group_id = local.bastion_sg_id
   security_group_id        = local.mysql_sg_id
 }
@@ -65,7 +65,7 @@ resource "aws_security_group_rule" "rabbitmq_bastion" {
   from_port = 22
   to_port   = 22
   protocol  = "tcp"
-  // which means rabbitmq accepting bastion sg id's
+  // which means rabbitmq accepting connection from bastion
   source_security_group_id = local.bastion_sg_id
   security_group_id        = local.rabbitmq_sg_id
 }
@@ -75,7 +75,7 @@ resource "aws_security_group_rule" "backend_alb_bastion" {
   from_port = 80
   to_port   = 80
   protocol  = "tcp"
-  // which means backend_alb accepting bastion sg id's
+  // which means backend_alb accepting connection from bastion
   source_security_group_id = local.bastion_sg_id
   security_group_id        = local.backend_alb_sg_id
 }
@@ -86,7 +86,7 @@ resource "aws_security_group_rule" "catalogue_bastion" {
   from_port = 22
   to_port   = 22
   protocol  = "tcp"
-  // which means catalogue accepting bastion sg id's
+  // which means catalogue accepting connection from bastion
   source_security_group_id = local.bastion_sg_id
   security_group_id        = local.catalogue_sg_id
 }
@@ -96,7 +96,7 @@ resource "aws_security_group_rule" "catalogue_backend_alb" {
   from_port         = 8080
   to_port           = 8080
   protocol          = "tcp"
-  # Where traffic is coming from
+  # which means catalogue accepting connection from backend_alb
   source_security_group_id = local.backend_alb_sg_id
   security_group_id = local.catalogue_sg_id
 }
