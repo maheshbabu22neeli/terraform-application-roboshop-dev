@@ -1,5 +1,6 @@
 resource "aws_lb" "backend_alb" {
-  name               = "${var.project}-${var.environment}"
+  # roboshop-dev-backend
+  name               = "${var.project}-${var.environment}-backend"
   internal           = true
   load_balancer_type = "application"
   security_groups    = [local.backend_alb_sg_id]
@@ -11,7 +12,7 @@ resource "aws_lb" "backend_alb" {
   tags = merge(
     local.common_tags,
     {
-      Name = "${var.project}-${var.environment}"
+      Name = "${var.project}-${var.environment}-backend"
     }
   )
 }
