@@ -36,7 +36,7 @@ resource "aws_lb_listener" "https" {
 
 resource "aws_route53_record" "frontend_alb" {
   zone_id         = var.zone_id
-  name            = "*.${var.domain_name}"    #example: https://roboshop-dev.neeli.online/
+  name            = "*.${var.domain_name}" #example: https://roboshop-dev.neeli.online/
   type            = "A"
   allow_overwrite = true
 

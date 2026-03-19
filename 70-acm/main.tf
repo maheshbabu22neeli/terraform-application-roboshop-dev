@@ -1,5 +1,5 @@
 resource "aws_acm_certificate" "roboshop" {
-  domain_name       = "*.${var.domain_name}"          # *.neeli.online
+  domain_name       = "*.${var.domain_name}" # *.neeli.online
   validation_method = "DNS"
 
   tags = merge(
