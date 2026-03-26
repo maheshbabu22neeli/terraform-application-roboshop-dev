@@ -1,0 +1,13 @@
+locals {
+  openvpn_ami_id = data.aws_ami.openvpn.id
+  # public subnet in 1a AZ
+  public_subnet_id = split(",", data.aws_ssm_parameter.public_subnet_ids.value)[0]
+  openvpn_sg_id    = data.aws_ssm_parameter.openvpn_sg_id.value
+
+  common_tags = {
+    Project     = var.project
+    Environment = var.environment
+    Terraform   = "true"
+  }
+
+}
